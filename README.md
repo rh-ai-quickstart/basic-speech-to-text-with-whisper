@@ -129,15 +129,21 @@ Ensure that the following are present and ready:
 ## Finding the Model Endpoint
 
 The deployed Whisper model can be accessed within the cluster.  
-There are two ways to find the service endpoint:
+There are several ways to find the service endpoint:
 
-### Option 1: Using the OpenShift Web Console
+### Option 1: Using OpenShift AI UI
+- Navigate to **Models → Model deployments** in the OpenShift AI dashboard.  
+- Find your deployed model and copy internal or external endpoint URL.  
+
+![rhoai-endpoint](./assets/images/rhoai-endpoint.png)
+
+### Option 2: Using the OpenShift Web Console
 - Navigate to **Networking → Services → whisper-large-v3-predictor**.  
 - Under **Service routing**, copy the **Hostname** (e.g., `whisper-large-v3-predictor.whisper-quickstart.svc.cluster.local`).  
 
 ![Service-Routing](./assets/images/serving-route.png)
 
-### Option 2: Using the `oc` CLI
+### Option 3: Using the `oc` CLI
 ```bash
 oc get svc whisper-large-v3-predictor -n whisper-quickstart \
   -o jsonpath='"http://{.metadata.name}.{.metadata.namespace}.svc.cluster.local:{.spec.ports[?(@.name=="http")].targetPort}{"\n"}"'
@@ -149,6 +155,7 @@ This will return a URL similar to:
 http://whisper-large-v3-predictor.whisper-quickstart.svc.cluster.local:8080
 ```
 ![oc-get-svc](./assets/images/oc-get-svc.png)
+
 ---
 
 ## Running Transcription Examples
@@ -160,7 +167,8 @@ From the Workbench, open one of the provided notebooks:
 
 Note: Both notebooks are preconfigured with demo endpoints — please update them before you run the cells.  
 
-![example-transcribe](./assets/images/example-transcribe.png)
+![example-transcribe](./assets/images/example-transcribe-1.png)
+![example-transcribe](./assets/images/example-transcribe-2.png)
 
 ---
 
