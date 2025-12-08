@@ -24,3 +24,7 @@ spec:
           cpu: {{ .Values.resources.limits.cpu | quote }}
           memory: {{ .Values.resources.limits.memory | quote }}
           nvidia.com/gpu: {{ .Values.resources.limits.gpu | quote }}
+    {{- if .Values.tolerations }}
+    tolerations:
+{{ .Values.tolerations | toYaml | indent 6 }}
+    {{- end }}
