@@ -5,6 +5,8 @@ metadata:
   namespace: {{ .Values.namespaces }}
   annotations:
     serving.kserve.io/deploymentMode: RawDeployment
+  labels:
+    opendatahub.io/dashboard: 'true'    
 spec:
   predictor:
     automountServiceAccountToken: false
